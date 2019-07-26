@@ -1,0 +1,590 @@
+TITLE
+Betas incident on the LDMX Ecal
+BEAM             -4.                            4.        8.          ELECTRON
+BEAMPOS          0.0       0.0      -10.
+* translate by 2.02cm (full length of layer C)
+ROT-DEFI                   0.0       0.0       0.0       0.0 -2.420000cl-trnsC
+ROT-DEFI                   0.0       0.0       0.0       0.0 -4.840000cl-trnsC2
+ROT-DEFI                   0.0       0.0       0.0       0.0 -7.260000cl-trnsC3
+ROT-DEFI                   0.0       0.0       0.0       0.0 -9.680000cl-trnsC4
+ROT-DEFI                   0.0       0.0       0.0       0.0     -12.1cl-trnsC5
+ROT-DEFI                   0.0       0.0       0.0       0.0    -14.52cl-trnsC6
+ROT-DEFI                   0.0       0.0       0.0       0.0    -16.94cl-trnsC7
+ROT-DEFI                   0.0       0.0       0.0       0.0    -19.36cl-trnsC8
+* translate by 3.12cm (full length of layer D)
+* (Note:  turns out extra digits of precision are unnecessary)
+ROT-DEFI                   0.0       0.0       0.0       0.0 -3.120000cl-trnsD
+* TESTING THIS
+ROT-DEFI                   0.0       0.0       0.0       0.0 -6.240000cl-trnsD2
+* TESTING THIS
+ROT-DEFI                   0.0       0.0       0.0       0.0 -9.360000cl-trnsD3
+* translate by 2.02cm (full length of layer C)
+ROT-DEFI                   0.0       0.0       0.0       0.0    -12.48cl-trnsD4
+GEOBEGIN                                                              COMBNAME
+    0    0          Simple model of the LDMX Ecal
+* Definitions of material thicknesses.  Indicated w _th.
+* Would like a way to scale the rest of the geometry if one quantity changes.  However, these are currently unused.
+#define Airthin .15
+#define PCBth .4
+#define CFMth .005
+#define Sith .05
+#define CFMTth .02
+#define Cth .035
+* W thicknesses, starting with sec A
+#define WAth0 .075
+#define WAth1 .075
+#define WBth0 .225
+#define WBth1 .15
+#define WCth0 .35
+#define WCth1 .175
+#define WDth0 .7
+#define WDth1 .35
+* Probably excessively large, but shouldn't have much of an effect on runtime.
+* simbox=blackhole surrounding sim
+RPP simbox     -10000. 10000. -10000. 10000. -10000. 10000.
+RPP vacbox     -5000. 5000. -5000. 5000. -5000. 5000.
+RPP ecal_box   -27.5 27.5 -27.5 27.5 0.0 45.
+* These define regions outside the ecal, to enable measurement of particle fluence out of ecal (and into hcal)
+* Only 3 are defined for now; all 5 would be redundant due to symmetry.
+RPP backout    -27.5 27.5 -27.5 27.5 45. 45.5
+RPP upout      27.5 28. -27.5 27.5 0.0 45.
+RPP rightout   -27.5 27.5 27.5 28. 0.0 45.
+RCC ecal_cyl   0.0 0.0 0.0 0.0 0.0 45. 25.500000
+* Pre-shower layer
+XYP plane0     0.0
+XYP plane1     .200
+XYP plane2     .600
+XYP plane3     .605
+XYP plane4     .655
+XYP plane5     .675
+XYP plane6     .710
+XYP plane7     .745
+XYP plane8     .765
+XYP plane9     .815
+XYP plane10    .820
+XYP PSbound    1.22
+* Layer A
+XYP plane11    1.370
+XYP plane12    1.445
+XYP plane13    1.595
+XYP plane14    1.995
+XYP plane15    2.
+XYP plane16    2.050
+XYP plane17    2.070
+XYP plane18    2.145
+XYP plane19    2.180
+XYP plane20    2.580
+XYP plane21    2.615
+XYP plane22    2.690
+XYP plane23    2.710
+XYP plane24    2.760
+XYP plane25    2.765
+XYP SAbound    3.165
+* Layer B
+XYP plane31    3.315
+XYP plane32    3.540
+XYP plane33    3.690
+XYP plane34    4.090
+XYP plane35    4.095
+XYP plane36    4.145
+XYP plane37    4.165
+XYP plane38    4.315
+XYP plane39    4.350
+XYP plane40    4.750
+XYP plane41    4.785
+XYP plane42    4.935
+XYP plane43    4.955
+XYP plane44    5.005
+XYP plane45    5.010
+XYP SBbound    5.410000
+* Layer C (this is latticed)
+* Trying more digits of precision...
+XYP plane51    5.560000
+XYP plane52    5.910000
+XYP plane53    6.060000
+XYP plane54    6.460000
+XYP plane55    6.465000
+XYP plane56    6.515000
+XYP plane57    6.535000
+XYP plane58    6.710000
+XYP plane59    6.745000
+XYP plane60    7.145000
+XYP plane61    7.180000
+XYP plane62    7.355000
+XYP plane63    7.375000
+XYP plane64    7.425000
+XYP plane65    7.430000
+XYP SCbound    7.830000
+* Defining lattice blocks:
+* Layer C width is 2.42
+* (all 9 C layers implemented)
+* NOTE:  SC to p1=first lattice region.  p1 to l1=first PCB.  l1 to p2=second lattice region.  Etc.
+XYP p1bound    9.850000
+XYP l1bound    10.250000
+XYP p2bound    12.270000
+XYP l2bound    12.670000
+XYP p3bound    14.690000
+XYP l3bound    15.090000
+XYP p4bound    17.110000
+XYP l4bound    17.510000
+XYP p5bound    19.530000
+XYP l5bound    19.930000
+XYP p6bound    21.950000
+XYP l6bound    22.350000
+XYP p7bound    24.370000
+XYP l7bound    24.770000
+XYP p8bound    26.790000
+XYP l8bound    27.190000
+* Section D begins
+XYP plane71    27.340000
+XYP plane72    28.040000
+XYP plane73    28.190000
+XYP plane74    28.590000
+XYP plane75    28.595000
+XYP plane76    28.645000
+XYP plane77    28.665000
+XYP plane78    29.015000
+XYP plane79    29.050000
+XYP plane80    29.450000
+XYP plane81    29.485000
+XYP plane82    29.835000
+XYP plane83    29.855000
+XYP plane84    29.905000
+XYP plane85    29.910000
+XYP SDbound    30.310000
+* Lattice blocks for section D
+* Width of each is 3.12 including PCB, 2.72 without
+XYP p9bound    33.030000
+XYP d1bound    33.430000
+XYP p10bound   36.150000
+XYP d2bound    36.550000
+XYP p11bound   39.270000
+XYP d3bound    39.670000
+XYP p12bound   42.390000
+XYP d4bound    42.790000
+XYP EcalEnd    45.
+END
+blackbox     5 +simbox -vacbox
+backvac      5 +backout
+upvac        5 +upout
+rightvac     5 +rightout
+Vacbox       5 +vacbox -ecal_box -backout -upout -rightout
+* Pre-Shower layer begins
+* Numbers are [nth layer in section]_[mth section]
+Al0_0        5 +ecal_box +plane1
+PCB0_0       5 +ecal_cyl -plane1 +plane2
+PCBvac00     5 +ecal_box -ecal_cyl  -plane1 +plane2
+CF0_0        5 +ecal_cyl -plane2 +plane3
+CFvac00      5 +ecal_box -ecal_cyl -plane2 +plane3
+Si0_0        5 +ecal_cyl -plane3 +plane4
+Sivac00      5 +ecal_box -ecal_cyl -plane3 +plane4
+CFT0_0       5 +ecal_box -plane4 +plane5
+C0_0         5 +ecal_box -plane5 +plane6
+C1_0         5 +ecal_box -plane6 +plane7
+CFT1_0       5 +ecal_box -plane7 +plane8
+Si1_0        5 +ecal_cyl -plane8 +plane9
+Sivac10      5 +ecal_box -ecal_cyl -plane8 +plane9
+CF1_0        5 +ecal_cyl -plane9 +plane10
+CFvac10      5 +ecal_box -ecal_cyl -plane9 +plane10
+PCB1_0       5 +ecal_cyl -plane10 +PSbound
+* Pre-shower layer ends
+PCBvac10     5 +ecal_box -ecal_cyl -plane10 +PSbound
+* Section A begins
+* Numbers are [nth layer in section]_[mth section]
+Air0_1       5 +ecal_box -PSbound +plane11
+Wth0_1       5 +ecal_box -plane11 +plane12
+Air1_1       5 +ecal_box -plane12 +plane13
+PCB0_1       5 +ecal_cyl -plane13 +plane14
+PCBvac01     5 +ecal_box -ecal_cyl -plane13 +plane14
+CF0_1        5 +ecal_cyl -plane14 +plane15
+CFvac01      5 +ecal_box -ecal_cyl -plane14 +plane15
+Si0_1        5 +ecal_cyl -plane15 +plane16
+Sivac01      5 +ecal_box -ecal_cyl -plane15 +plane16
+CFT0_1       5 +ecal_box -plane16 +plane17
+WA0_1        5 +ecal_box -plane17 +plane18
+C0_1         5 +ecal_box -plane18 +plane19
+Airth0_1     5 +ecal_box -plane19 +plane20
+C1_1         5 +ecal_box -plane20 +plane21
+WA1_1        5 +ecal_box -plane21 +plane22
+CFT1_1       5 +ecal_box -plane22 +plane23
+Si1_1        5 +ecal_cyl -plane23 +plane24
+Sivac11      5 +ecal_box -ecal_cyl -plane23 +plane24
+CF1_1        5 +ecal_cyl -plane24 +plane25
+CFvac11      5 +ecal_box -ecal_cyl -plane24 +plane25
+PCB1_1       5 +ecal_cyl -plane25 +SAbound
+* Section A ends
+PCBvac11     5 +ecal_box -ecal_cyl -plane25 +SAbound
+* Section B begins
+Air0_2       5 +ecal_box -SAbound +plane31
+Wth0_2       5 +ecal_box -plane31 +plane32
+Air1_2       5 +ecal_box -plane32 +plane33
+PCB0_2       5 +ecal_cyl -plane33 +plane34
+PCBvac02     5 +ecal_box -ecal_cyl -plane33 +plane34
+CF0_2        5 +ecal_cyl -plane34 +plane35
+CFvac02      5 +ecal_box -ecal_cyl -plane34 +plane35
+Si0_2        5 +ecal_cyl -plane35 +plane36
+Sivac02      5 +ecal_box -ecal_cyl -plane35 +plane36
+CFT0_2       5 +ecal_box -plane36 +plane37
+WA0_2        5 +ecal_box -plane37 +plane38
+C0_2         5 +ecal_box -plane38 +plane39
+Airth0_2     5 +ecal_box -plane39 +plane40
+C1_2         5 +ecal_box -plane40 +plane41
+WA1_2        5 +ecal_box -plane41 +plane42
+CFT1_2       5 +ecal_box -plane42 +plane43
+Si1_2        5 +ecal_cyl -plane43 +plane44
+Sivac12      5 +ecal_box -ecal_cyl -plane43 +plane44
+CF1_2        5 +ecal_cyl -plane44 +plane45
+CFvac12      5 +ecal_box -ecal_cyl -plane44 +plane45
+PCB1_2       5 +ecal_cyl -plane45 +SBbound
+* Section B ends
+PCBvac12     5 +ecal_box -ecal_cyl -plane45 +SBbound
+* Section C begins
+* (This one gets repeated via LATTICE)
+Air0_3       5 +ecal_box -SBbound +plane51
+Wth0_3       5 +ecal_box -plane51 +plane52
+Air1_3       5 +ecal_box -plane52 +plane53
+PCB0_3       5 +ecal_cyl -plane53 +plane54
+PCBvac03     5 +ecal_box -ecal_cyl -plane53 +plane54
+CF0_3        5 +ecal_cyl -plane54 +plane55
+CFvac03      5 +ecal_box -ecal_cyl -plane54 +plane55
+Si0_3        5 +ecal_cyl -plane55 +plane56
+Sivac03      5 +ecal_box -ecal_cyl -plane55 +plane56
+CFT0_3       5 +ecal_box -plane56 +plane57
+WA0_3        5 +ecal_box -plane57 +plane58
+C0_3         5 +ecal_box -plane58 +plane59
+Airth0_3     5 +ecal_box -plane59 +plane60
+C1_3         5 +ecal_box -plane60 +plane61
+WA1_3        5 +ecal_box -plane61 +plane62
+CFT1_3       5 +ecal_box -plane62 +plane63
+Si1_3        5 +ecal_cyl -plane63 +plane64
+Sivac13      5 +ecal_box -ecal_cyl -plane63 +plane64
+CF1_3        5 +ecal_cyl -plane64 +plane65
+CFvac13      5 +ecal_box -ecal_cyl -plane64 +plane65
+PCB1_3       5 +ecal_cyl -plane65 +SCbound
+* First C layer ends
+* NOTE:  THIS PCB IS NO LONGER TRANSLATED BY LATTICE
+PCBvac13     5 +ecal_box -ecal_cyl -plane65 +SCbound
+* First region to be copied into
+* NEW DEFINITION:  Layer C width is 2.02cm (I think)
+Clone1       5 +ecal_box -SCbound +p1bound
+* Second PCB
+* Alternates:  lattice region, PCB, lattice region, PCB...
+* PCBs are separate to make it possible use USRBIN on each one individually
+* Note:  First PCB in each layer is ignored; resolution is good enough without it
+* Note:  PCBC1 is technically the second PCB in region C.  This doesn't match the USRBIN numbering.
+PCBC1        5 +ecal_cyl -p1bound +l1bound
+PCBCvac1     5 +ecal_box -ecal_cyl -p1bound +l1bound
+Clone2       5 +ecal_box -l1bound +p2bound
+PCBC2        5 +ecal_cyl -p2bound +l2bound
+PCBCvac2     5 +ecal_box -ecal_cyl -p2bound +l2bound
+Clone3       5 +ecal_box -l2bound +p3bound
+PCBC3        5 +ecal_cyl -p3bound +l3bound
+PCBCvac3     5 +ecal_box -ecal_cyl -p3bound +l3bound
+Clone4       5 +ecal_box -l3bound +p4bound
+PCBC4        5 +ecal_cyl -p4bound +l4bound
+PCBCvac4     5 +ecal_box -ecal_cyl -p4bound +l4bound
+Clone5       5 +ecal_box -l4bound +p5bound
+PCBC5        5 +ecal_cyl -p5bound +l5bound
+PCBCvac5     5 +ecal_box -ecal_cyl -p5bound +l5bound
+Clone6       5 +ecal_box -l5bound +p6bound
+PCBC6        5 +ecal_cyl -p6bound +l6bound
+PCBCvac6     5 +ecal_box -ecal_cyl -p6bound +l6bound
+Clone7       5 +ecal_box -l6bound +p7bound
+PCBC7        5 +ecal_cyl -p7bound +l7bound
+PCBCvac7     5 +ecal_box -ecal_cyl -p7bound +l7bound
+Clone8       5 +ecal_box -l7bound +p8bound
+PCBC8        5 +ecal_cyl -p8bound +l8bound
+PCBCvac8     5 +ecal_box -ecal_cyl -p8bound +l8bound
+* Section D begins, region 70
+* This gets LATTICED up to five layers
+Air0_4       5 +ecal_box -l8bound +plane71
+Wth0_4       5 +ecal_box -plane71 +plane72
+Air1_4       5 +ecal_box -plane72 +plane73
+PCB0_4       5 +ecal_cyl -plane73 +plane74
+PCBvac04     5 +ecal_box -ecal_cyl -plane73 +plane74
+CF0_4        5 +ecal_cyl -plane74 +plane75
+CFvac04      5 +ecal_box -ecal_cyl -plane74 +plane75
+Si0_4        5 +ecal_cyl -plane75 +plane76
+Sivac04      5 +ecal_box -ecal_cyl -plane75 +plane76
+CFT0_4       5 +ecal_box -plane76 +plane77
+WA0_4        5 +ecal_box -plane77 +plane78
+C0_4         5 +ecal_box -plane78 +plane79
+Airth0_4     5 +ecal_box -plane79 +plane80
+C1_4         5 +ecal_box -plane80 +plane81
+WA1_4        5 +ecal_box -plane81 +plane82
+CFT1_4       5 +ecal_box -plane82 +plane83
+Si1_4        5 +ecal_cyl -plane83 +plane84
+Sivac14      5 +ecal_box -ecal_cyl -plane83 +plane84
+CF1_4        5 +ecal_cyl -plane84 +plane85
+CFvac14      5 +ecal_box -ecal_cyl -plane84 +plane85
+PCB1_4       5 +ecal_cyl -plane85 +SDbound
+* region 85
+PCBvac14     5 +ecal_box -ecal_cyl -plane85 +SDbound
+* Begin lattice+PCB region D
+Clone9       5 +ecal_box -SDbound +p9bound
+PCBD1        5 +ecal_cyl -p9bound +d1bound
+PCBDvac1     5 +ecal_box -ecal_cyl -p9bound +d1bound
+Clone10      5 +ecal_box -d1bound +p10bound
+PCBD2        5 +ecal_cyl -p10bound +d2bound
+PCBDvac2     5 +ecal_box -ecal_cyl -p10bound +d2bound
+Clone11      5 +ecal_box -d2bound +p11bound
+PCBD3        5 +ecal_cyl -p11bound +d3bound
+PCBDvac3     5 +ecal_box -ecal_cyl -p11bound +d3bound
+Clone12      5 +ecal_box -d3bound +p12bound
+PCBD4        5 +ecal_cyl -p12bound +d4bound
+PCBDvac4     5 +ecal_box -ecal_cyl -p12bound +d4bound
+* Filling in the rest w vacuum
+EcalVac      5 +ecal_box -d4bound +EcalEnd
+END
+* Begin LATTICEs:
+* For every particle that reaches layer X, translate it back by cl-trns (to an already-described region)
+* One required for every lattice region:  8 Cs, 4 Ds.
+LATTICE       Clone1    Clone1        1.        1.        1.        1.cl-trnsC
+LATTICE       Clone2    Clone2        1.        2.        2.        1.cl-trnsC2
+LATTICE       Clone3    Clone3        1.        3.        3.        1.cl-trnsC3
+LATTICE       Clone4    Clone4        1.        4.        4.        1.cl-trnsC4
+LATTICE       Clone5    Clone5        1.        5.        5.        1.cl-trnsC5
+LATTICE       Clone6    Clone6        1.        6.        6.        1.cl-trnsC6
+LATTICE       Clone7    Clone7        1.        7.        7.        1.cl-trnsC7
+LATTICE       Clone8    Clone8        1.        8.        8.        1.cl-trnsC8
+LATTICE       Clone9    Clone9        1.        9.        9.        1.cl-trnsD
+LATTICE      Clone10   Clone10        1.       10.       10.        1.cl-trnsD2
+LATTICE      Clone11   Clone11        1.       11.       11.        1.cl-trnsD3
+LATTICE      Clone12   Clone12        1.       12.       12.        1.cl-trnsD4
+GEOEND
+* Begin material definition section
+* 104 Air dry (near sea level)
+MATERIAL                       .00120484                              AIR
+MATERIAL                            5.68                              PCBMix
+* PCB material:  (FR40 in GDML)
+* - .5 Cu
+* - .2299 O
+* - .0482 Na
+* - .1683 Si
+* - .0536 Ca
+COMPOUND         0.5    COPPER    0.2299    OXYGEN    0.0482    SODIUMPCBMix
+COMPOUND      0.1683   SILICON    0.0536   CALCIUM                    PCBMix
+MATERIAL                            .845                              CFMix
+* CFMix0x10ab990 mix:
+* - .8449 C
+* - .0425 H
+* - .1126 O
+COMPOUND      0.8449    CARBON    0.0425  HYDROGEN    0.1126    OXYGENCFMix
+COMPOUND   -1.248E-4    CARBON -0.755267  NITROGEN -0.231781    OXYGENAIR
+COMPOUND   -0.012827     ARGON                                        AIR
+* Begin material assignment section
+ASSIGNMA    ALUMINUM     Al0_0
+* PCB Material:  double check this...
+ASSIGNMA      PCBMix    PCB0_0
+ASSIGNMA      VACUUM  PCBvac00
+ASSIGNMA       CFMix     CF0_0
+ASSIGNMA     SILICON     Si0_0
+ASSIGNMA       CFMix    CFT0_0
+ASSIGNMA      CARBON      C0_0
+ASSIGNMA      CARBON      C1_0
+ASSIGNMA       CFMix    CFT1_0
+ASSIGNMA     SILICON     Si1_0
+ASSIGNMA       CFMix     CF1_0
+ASSIGNMA      PCBMix    PCB1_0
+* Section A
+ASSIGNMA         AIR    Air0_1
+ASSIGNMA    TUNGSTEN    Wth0_1
+ASSIGNMA         AIR    Air1_1
+ASSIGNMA      PCBMix    PCB0_1
+ASSIGNMA       CFMix     CF0_1
+ASSIGNMA     SILICON     Si0_1
+ASSIGNMA       CFMix    CFT0_1
+ASSIGNMA    TUNGSTEN     WA0_1
+ASSIGNMA      CARBON      C0_1
+ASSIGNMA         AIR  Airth0_1
+ASSIGNMA      CARBON      C1_1
+ASSIGNMA    TUNGSTEN     WA1_1
+ASSIGNMA       CFMix    CFT1_1
+ASSIGNMA     SILICON     Si1_1
+ASSIGNMA       CFMix     CF1_1
+ASSIGNMA      PCBMix    PCB1_1
+* Section B
+ASSIGNMA         AIR    Air0_2
+ASSIGNMA    TUNGSTEN    Wth0_2
+ASSIGNMA         AIR    Air1_2
+ASSIGNMA      PCBMix    PCB0_2
+ASSIGNMA       CFMix     CF0_2
+ASSIGNMA     SILICON     Si0_2
+ASSIGNMA       CFMix    CFT0_2
+ASSIGNMA    TUNGSTEN     WA0_2
+ASSIGNMA      CARBON      C0_2
+ASSIGNMA         AIR  Airth0_2
+ASSIGNMA      CARBON      C1_2
+ASSIGNMA    TUNGSTEN     WA1_2
+ASSIGNMA       CFMix    CFT1_2
+ASSIGNMA     SILICON     Si1_2
+ASSIGNMA       CFMix     CF1_2
+ASSIGNMA      PCBMix    PCB1_2
+* Section C
+ASSIGNMA         AIR    Air0_3
+ASSIGNMA    TUNGSTEN    Wth0_3
+ASSIGNMA         AIR    Air1_3
+ASSIGNMA      PCBMix    PCB0_3
+ASSIGNMA       CFMix     CF0_3
+ASSIGNMA     SILICON     Si0_3
+ASSIGNMA       CFMix    CFT0_3
+ASSIGNMA    TUNGSTEN     WA0_3
+ASSIGNMA      CARBON      C0_3
+ASSIGNMA         AIR  Airth0_3
+ASSIGNMA      CARBON      C1_3
+ASSIGNMA    TUNGSTEN     WA1_3
+ASSIGNMA       CFMix    CFT1_3
+ASSIGNMA     SILICON     Si1_3
+ASSIGNMA       CFMix     CF1_3
+ASSIGNMA      PCBMix    PCB1_3
+* Note:  new PCBCs are filled here
+ASSIGNMA      PCBMix     PCBC1
+ASSIGNMA      PCBMix     PCBC2
+ASSIGNMA      PCBMix     PCBC3
+ASSIGNMA      PCBMix     PCBC4
+ASSIGNMA      PCBMix     PCBC5
+ASSIGNMA      PCBMix     PCBC6
+ASSIGNMA      PCBMix     PCBC7
+ASSIGNMA      PCBMix     PCBC8
+* Section D
+ASSIGNMA         AIR    Air0_4
+ASSIGNMA    TUNGSTEN    Wth0_4
+ASSIGNMA         AIR    Air1_4
+ASSIGNMA      PCBMix    PCB0_4
+ASSIGNMA       CFMix     CF0_4
+ASSIGNMA     SILICON     Si0_4
+ASSIGNMA       CFMix    CFT0_4
+ASSIGNMA    TUNGSTEN     WA0_4
+ASSIGNMA      CARBON      C0_4
+ASSIGNMA         AIR  Airth0_4
+ASSIGNMA      CARBON      C1_4
+ASSIGNMA    TUNGSTEN     WA1_4
+ASSIGNMA       CFMix    CFT1_4
+ASSIGNMA     SILICON     Si1_4
+ASSIGNMA       CFMix     CF1_4
+ASSIGNMA      PCBMix    PCB1_4
+* Note:  New PCBDs are filled here
+ASSIGNMA      PCBMix     PCBD1
+ASSIGNMA      PCBMix     PCBD2
+ASSIGNMA      PCBMix     PCBD3
+ASSIGNMA      PCBMix     PCBD4
+ASSIGNMA    BLCKHOLE  blackbox
+ASSIGNMA      VACUUM    Vacbox
+ASSIGNMA      VACUUM   EcalVac
+ASSIGNMA      VACUUM   backvac
+ASSIGNMA      VACUUM     upvac
+ASSIGNMA      VACUUM  rightvac
+* Fill all "vac" regions with air
+ASSIGNMA         AIR  PCBvac00
+ASSIGNMA         AIR   CFvac00
+ASSIGNMA         AIR   Sivac00
+ASSIGNMA         AIR   Sivac10
+ASSIGNMA         AIR   CFvac10
+ASSIGNMA         AIR  PCBvac10
+ASSIGNMA         AIR  PCBvac01
+ASSIGNMA         AIR   CFvac01
+ASSIGNMA         AIR   Sivac01
+ASSIGNMA         AIR   CFvac11
+ASSIGNMA         AIR  PCBvac11
+ASSIGNMA         AIR   Sivac11
+ASSIGNMA         AIR  PCBvac02
+ASSIGNMA         AIR   CFvac02
+ASSIGNMA         AIR   Sivac02
+ASSIGNMA         AIR   Sivac12
+ASSIGNMA         AIR   CFvac12
+ASSIGNMA         AIR  PCBvac12
+ASSIGNMA         AIR  PCBvac03
+ASSIGNMA         AIR   CFvac03
+ASSIGNMA         AIR   Sivac03
+ASSIGNMA         AIR   Sivac13
+ASSIGNMA         AIR   CFvac13
+ASSIGNMA         AIR  PCBvac13
+ASSIGNMA         AIR  PCBCvac1
+ASSIGNMA         AIR  PCBCvac2
+ASSIGNMA         AIR  PCBCvac3
+ASSIGNMA         AIR  PCBCvac4
+ASSIGNMA         AIR  PCBCvac4
+ASSIGNMA         AIR  PCBCvac6
+ASSIGNMA         AIR  PCBCvac5
+ASSIGNMA         AIR  PCBCvac7
+ASSIGNMA         AIR  PCBCvac8
+ASSIGNMA         AIR  PCBvac04
+ASSIGNMA         AIR   CFvac04
+ASSIGNMA         AIR   Sivac04
+ASSIGNMA         AIR   Sivac14
+ASSIGNMA         AIR   CFvac14
+ASSIGNMA         AIR  PCBvac14
+ASSIGNMA         AIR  PCBDvac1
+ASSIGNMA         AIR  PCBDvac2
+ASSIGNMA         AIR  PCBDvac3
+ASSIGNMA         AIR  PCBDvac4
+* OUTPUT:
+* SI1MEVNE is 1 MeV fluence equivalent in Si
+* - NOTE:  The default output is average fluence PER SINGLE EVENT.  Multiply this by the # of events to get the total fluence.
+* Output for first 3 layers is sent to fort.48 (pre, A, B)
+* Currently examining a 10cm x 10cm area--the beamspot doesn't expand too much beyond that
+* PCB 0_1
+USRBIN           10.  SI1MEVNE      -48.        5.        5.     1.995PCBRad2
+USRBIN           -5.       -5.     1.595       20.       20.        1. &
+* PCB 1_1
+USRBIN           10.  SI1MEVNE      -48.        5.        5.     3.165PCBRad3
+USRBIN           -5.       -5.     2.765       20.       20.        1. &
+* PCB 1_2
+USRBIN           10.  SI1MEVNE      -48.        5.        5.      5.41PCBRad4
+USRBIN           -5.       -5.      5.01       20.       20.        1. &
+* Lattice C, including the non-lattice cell
+* NOTE:  Each PCB 1_x (PCBCx) gets its own usrbin.
+* C PCB results are sent to fort.49.
+* NOTE:  The following card is for PCB0_3, NOT PCB1_3.  This doesn't follow the below pattern; it's because the maximum flux occurs around here.
+USRBIN           10.  SI1MEVNE      -49.        5.        5.      6.46PCBC0_3
+USRBIN           -5.       -5.      6.06       20.       20.        1. &
+* Lattice C, including the non-lattice cell
+* NOTE:  Each PCB 1_x (PCBCx) gets its own usrbin.
+* C PCB results are sent to fort.49.
+USRBIN           10.  SI1MEVNE      -49.        5.        5.      7.83PCBC1
+USRBIN           -5.       -5.      7.43       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -49.        5.        5.     10.25PCBC2
+USRBIN           -5.       -5.      9.85       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -49.        5.        5.     12.67PCBC3
+USRBIN           -5.       -5.     12.27       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -49.        5.        5.     15.09PCBC4
+USRBIN           -5.       -5.     14.69       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -49.        5.        5.     17.51PCBC5
+USRBIN           -5.       -5.     17.11       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -49.        5.        5.     19.93PCBC6
+USRBIN           -5.       -5.     19.53       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -49.        5.        5.     22.35PCBC7
+USRBIN           -5.       -5.     21.95       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -49.        5.        5.     24.77PCBC8
+USRBIN           -5.       -5.     24.37       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -49.        5.        5.     27.19PCBC9
+USRBIN           -5.       -5.     26.79       20.       20.        1. &
+* Lattice D
+* D PCBs are output to fort.50.
+USRBIN           10.  SI1MEVNE      -50.        5.        5.     30.31PCBD1
+USRBIN           -5.       -5.     29.91       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -50.        5.        5.     33.43PCBD2
+USRBIN           -5.       -5.     33.03       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -50.        5.        5.     36.55PCBD3
+USRBIN           -5.       -5.     36.15       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -50.        5.        5.     39.67PCBD4
+USRBIN           -5.       -5.     39.27       20.       20.        1. &
+USRBIN           10.  SI1MEVNE      -50.        5.        5.     42.79PCBD5
+USRBIN           -5.       -5.     42.39       20.       20.        1. &
+* Measuring fluence emitted out of ecal, via the back/top/right
+* Note:  Ignoring bottom and left; redundant b/c symmetry.
+* backout:
+* Using 5cm bins everywhere (note:  fairly large, may lower this later)
+USRBIN           10.  SI1MEVNE      -60.      27.5      27.5      45.5PCBD6
+USRBIN         -27.5     -27.5       45.       11.       11.        1. &
+* upout:
+USRBIN           10.  SI1MEVNE      -60.       28.      27.5       45.PCBD7
+USRBIN          27.5     -27.5       0.0        1.       11.        9. &
+* rightout:
+USRBIN           10.  SI1MEVNE      -60.      27.5       28.       45.PCBD8
+USRBIN         -27.5      27.5       0.0       11.        1.        9. &
+* 101 for most recent run
+RANDOMIZ          1.      102.
+* Currently testing 250k events.  Takes ~8 hrs on my laptop.
+START        250000.
+STOP
